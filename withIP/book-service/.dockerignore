@@ -3,6 +3,6 @@
 Dockerfile
 ReadMe.md
 **/node_modules
-mongo-init.js
+initdb.js
 docker-compose.yml
 .vscode
