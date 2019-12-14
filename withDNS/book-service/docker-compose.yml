@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  book:
+    container_name: book-service
+    restart: always
+    build: .
+    ports:
+      - "3002:3001"
+    networks: 
+      - book_network
+  mongo:
+    container_name: book-mongo
+    image: mongo:4.2.1
+    networks: 
+      - book_network
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: "dbtest"
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "password"
+    volumes:
+      - ./initdb.js:/docker-entrypoint-initdb.d/initdb.js
+      - mongo-db:/data/db
+      - mongo-backup:/backup
+volumes:
+  mongo-db:
+  mongo-backup:
+networks: 
+  book_network:
